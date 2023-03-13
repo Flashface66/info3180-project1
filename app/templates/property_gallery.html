@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include 'flash_messages.html' %}
+
+<h1 class="prop-header">Properties</h1>
+
+<div class="properties">
+ 
+        {% for prop in properties %}
+
+
+            <div class="property-card">
+                <div class="property-card-photo">
+                    <img
+                    class="property-photo"
+                    src="{{ url_for('get_image', filename=prop.photo) }}"
+                    alt="Property Photo"
+                />
+                </div>
+                <div class="property-card-body">
+                    <h3>{{ prop.title }}</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> {{ prop.location }}</p>
+                    <p class="price-bubble">${{ prop.price }}</p>
+                </div>
+                <a href="{{url_for('view', property_id=prop.id)}}"
+                ><button>View Property</button></a>
+            </div>
+
+          
+
+        {% endfor %}
+
+</div>
+
+{% endblock %}

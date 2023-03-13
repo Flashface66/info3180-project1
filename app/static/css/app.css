@@ -1,3 +1,113 @@
 body {
     padding-top: 5rem;
 }
+
+.properties{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.prop-list {
+  
+    list-style: none;
+  }
+  
+  .prop-list li{
+    display: inline-block;
+    padding: 10px; /* add padding to create space between items */
+    height: 300px;
+  }
+  
+  .property-card{
+
+    flex-direction: column;
+    border: 2px solid #c2c2c2;   
+    box-shadow: 10px 10px 20px 5px #888;
+    width: 400px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .property-card-body {
+    padding-left: 20px;
+  }
+
+  .price-bubble {
+    background-color:#58a3f8;
+    border-radius: 20px;
+    padding: 5px 12px;
+  
+    color: #ffffff;
+    width: 40%;
+  }
+
+  .property-card button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #14b7a5;
+    color: #ffffff;
+    border-radius: 0px 0px 5px 5px;
+    
+  }
+
+.property-photo{
+    width: 397px;
+    height: 297px;
+}
+
+.property-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .property-container {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    width: 80%;
+    margin: 30px 0;
+    box-shadow: 0 4px 8px 0 #00000033;
+  }
+  
+  .property-img {
+    height: 100%;
+    width: 95%;
+  }
+  
+  .bubbles {
+    display: flex;
+  }
+  .bubble {
+    text-align: center;
+    border-radius: 30px;
+    padding: 6px 20px;
+    color: #ffffff;
+    margin: 10px 20px 10px 0px;
+  }
+  
+  .prop-price {
+    background: #63a0fc;
+  }
+  
+  .prop-type {
+    background: #fbbf23;
+  }
+  
+  .property-body {
+    padding: 20px;
+  }
+  
+  .email-btn {
+    background-color: #14b7a5;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 10px 20px;
+    margin: 20px 0;
+  }
+  
+  .num_bedrooms {
+    margin: 15px 0;
+  }

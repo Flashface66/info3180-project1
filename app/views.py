@@ -4,9 +4,14 @@ Jinja2 Documentation:    https://jinja.palletsprojects.com/
 Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
+import os
+from app import app, db
+from flask import render_template, request, redirect, url_for, flash
+from werkzeug.utils import secure_filename
+from flask.helpers import send_from_directory
 
-from app import app
-from flask import render_template, request, redirect, url_for
+from app.forms import PropertyForm
+from app.models import Properties
 
 
 ###
@@ -23,6 +28,79 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
+
+@app.route('/properties/create', methods=["GET", "POST"] )
+def create():
+    form = PropertyForm()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        # Save property data to database
+        title = form.title.data
+        description = form.description.data
+        bedrooms = form.bedrooms.data
+        bathrooms = form.bathrooms.data
+        price = form.price.data
+        location = form.location.data
+        type = form.type.data
+        photo = form.photo.data
+        photo_upload = secure_filename(photo.filename)
+        photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photo_upload))
+
+        
+        property_model = Properties(
+            title=title,
+            description=description,
+            bedrooms=bedrooms,
+            bathrooms=bathrooms,
+            price=price,
+            location=location,
+            type=type,
+            photo = photo_upload)
+
+        db.session.add(property_model)
+        db.session.commit()
+
+        flash('Property successfully saved', 'success')
+        return redirect(url_for('properties'))
+    
+    return render_template('property_create.html', form=form)
+
+
+@app.route('/properties')
+
+def properties():
+    properties = Properties.query.all()
+    return render_template("property_gallery.html", properties=properties )
+
+
+@app.route("/property/<property_id>")
+def view(property_id):
+    
+    prop = Properties.query.filter_by(id=property_id).first()
+
+  
+    if prop.photo is not None:
+        photo_url = url_for('get_image', filename=prop.photo) 
+    else:
+        photo_url = None
+    
+    # Pass the property and photo URL to the template
+    return render_template("property_view.html", prop=prop, photo_url=photo_url)
+
+
+# def get_uploaded_images():
+#     rootdir = os.getcwd()
+#     filenames = []
+#     for subdir, dirs, files in os.walk(rootdir + '/uploads'):
+#         for file in files:
+#             if file.endswith('.jpg') or file.endswith('.png'):
+#                 filenames.append(file)
+#     return filenames
+
+
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 ###

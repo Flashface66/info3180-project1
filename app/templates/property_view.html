@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block main %}
+<div class="property-wrapper">
+  <div class="property-container">
+    <img
+      class="property-img"
+      src="{{ photo_url }}"
+      alt="property_img"
+    />
+    <div class="property-body">
+      <h2>{{prop.title}}</h2>
+      <div class="bubbles">
+        <div class="prop-price bubble">${{prop.price}}</div>
+        <div class="prop-type bubble">
+          {{prop.type.capitalize()}}
+        </div>
+        
+      </div>
+
+      <p>{{prop.description}}</p>
+     
+
+      <div class="num_bedrooms">
+        <i class="fas fa-bed"></i> {{prop.bedrooms}} Bedrooms
+  
+        <i class="fas fa-bath"></i> {{prop.bathrooms}} Bathrooms
+      </div>
+
+      <div class="location"><i class="fas fa-map-marker-alt"></i> {{prop.location}}</div>
+
+      <button class="email-btn">Email Realtor</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

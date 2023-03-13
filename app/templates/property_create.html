@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="form-container">
+    <form method="POST" id="contactForm" name="contactForm" enctype="multipart/form-data" action="/properties/create">
+        {{ form.csrf_token }}
+        <div class="row">
+            <div class="col-md-8 form-group">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control") }}
+    
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 form-group">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control") }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 form-group">
+                {{ form.bedrooms.label(class="form-label") }}
+                {{ form.bedrooms(class="form-control") }}
+            </div>
+
+            <div class="col-md-4 form-group">
+                {{ form.bathrooms.label(class="form-label") }}
+                {{ form.bathrooms(class="form-control") }}
+            </div>
+        </div>
+
+    
+
+        <div class="row">
+            <div class="col-md-4 form-group">
+                {{ form.price.label(class="form-label") }}
+                {{ form.price(class="form-control") }}
+            </div>
+
+            <div class="col-md-4 form-group">
+                {{ form.type.label() }}
+                {{ form.type(class="form-control") }}
+            </div>
+        </div>
+
+   
+        <div class="row">
+            <div class="col-md-4 form-group">
+                {{ form.location.label(class="form-label") }}
+                {{ form.location(class="form-control") }}
+            </div>
+        </div>
+
+        <div>
+            {{ form.photo.label(class="form-label") }}
+            <br>
+            <label class="btn btn-primary" onclick="document.getElementById('{{ form.photo.id }}').click();">
+                <i class="fas fa-file-upload"></i> Browse
+              </label>
+              {{ form.photo(class="form-control", style="display:none") }}
+              
+            
+        </div>
+        
+        <br>
+        {{ form.submit (class="btn btn-primary rounded-0 py-2 px-4" ) }}
+
+    </form>
+</div>
+
+{% endblock %}
